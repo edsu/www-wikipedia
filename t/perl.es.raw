@@ -1,0 +1,46 @@
+'''Perl''' ('''P'''ractical '''E'''xtraction and '''R'''eport '''L'''anguage) es un [[lenguaje de programación]] desarrollado por [[Larry Wall]] (lwall at netlabs.com) a partir otras herramientas de [[UNIX]] como son: [[ed]],[[grep]],[[awk]],[[c-shell]], para la administración de tareas propias de sistemas [[UNIX]].
+
+No establece ninguna filosofía de [[programación]] concreta. No se puede decir que sea [[Programación orientada a objetos|orientado a objetos]], [[Programación modular|modular]] o [[Programación estructurada|estructurado]] aunque soporta directamente todos estos [[Paradigma de programación|paradigmas]] y su punto fuerte son las labores de procesamiento de textos y archivos.
+
+No es ni un [[compilador]] ni un [[intérprete]], esta en un punto intermedio, cuando mandamos a ejecutar un programa en Perl, se compila el código fuente a un código intermedio en memoria que se optimiza como si se fuera a elaborar un programa ejecutable pero es ejecutado por un motor, como si se tratase de un interprete.
+
+[[Lenguaje de programación]] basado en [[script]]s portable a casi cualquier plataforma. Es muy utilizado para escribir [[CGI]]s.
+
+[[Lenguaje]] optimizado para el escaneo de texto arbitrario de [[fichero]]s. Es también un buen [[lenguaje]] para tareas de administración de sistemas. Es un [[lenguaje]] con intención de ser práctico en lugar de bonito. Satisface las tres virtudes del programador: flojera, impaciencia y petulancia.
+
+Según el manual, Perl también significa ''Pathologically Eclectic Rubbish Lister''.
+
+---------
+
+Resumen técnico de PERL.
+
+PERL es un [[lenguaje]] de [[script]] de tipo [[BCPL]] (como [[TCL]] o [[PHP]]), muy semejante al [[AWK]] (de hecho está basado en él), de tipo estructurado con trazas de orientación a objetos (no completamente soportado de forma directa), que permite el desarrollo rápido de aplicaciones y herramientas especialmente orientadas al tratamiento de textos y archivos, aunque actualmente también se utiliza incluso para entornos graficos, en combinacion con sistemas como [[Perl/TK]] o [[GTK]].
+
+Básicamente, es un lenguaje que se ha intentado que sea lo más natural posible, lo que conlleva que en ocasiones nos encontremos estructuras poco habituales en un lenguaje de este tipo:
+
+<code>print "hola" if $saludo == 1;</code>
+
+Destaca también el uso de [[variable]]s especiales, muy habituales en los lenguajes de tipo script en los sistemas de tipo [[Unix]]. Estas variables permiten realizar una serie de operaciones sobre los datos y los archivos que aportan a PERL una flexibilidad y potencia enormes. Además de variables que podemos encontrar en otros lenguajes como <code>@ARGV</code> (indica los parámetros con los que se ha llamado al programa) o <code>%ENV</code> (indica las [[variables de entorno]] de la aplicación), podemos utilizar también variables como <code>$_</code> (que representa el último dato que llegó por la [[entrada estandar]]), o <code>$/</code>, que nos indica si PERL debe enviar el texto a la [[salida estandar]] inmediatamente (o al flujo de salida que le hayamos indicado previamente). PERL tiene implementadas las [[expresión regular| expresiones regulares]], (regular expressions), lo que le da una potencia muy grande en el procesamiento de textos.
+
+
+
+
+
+
+
+[[category:Lenguajes interpretados]]
+{{Template:Lenguajes de programacion}}
+{{Soluciones LAMP}}
+[[cs:Perl]]
+[[de:Perl]]
+[[en:Perl]]
+[[eo:Perl]]
+[[et:Perl]]
+[[fi:Perl]]
+[[fr:Perl]]
+[[it:Perl]]
+[[ja:Perl]]
+[[nl:Programmeertaal Perl]]
+[[pl:Perl]]
+[[pt:Perl]]
+[[sv:Perl]]

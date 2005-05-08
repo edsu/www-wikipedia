@@ -1,0 +1,473 @@
+[[Category:Programming languages]]
+
+[[image:Programming-republic-of-perl.gif|right|Programming Republic Of Perl]]
+
+'''Perl''', also '''Practical Extraction and Report Language''' (a [[backronym]], see [[#Name|below]]), is a [[programming language]] released by [[Larry Wall]] on [[December 18]], [[1987]] that borrows features from [[C programming language|C]], [[sed]], [[awk]], [[UNIX shell|shell]] scripting ([[UNIX shell|sh]]), and (to a lesser extent) from many other programming languages.
+
+== Rationale  ==
+Perl was designed to be a practical language to extract information from text files and to generate reports from that information. One of its mottos is "There's more than one way to do it" (TMTOWTDI - pronounced 'Tim Toady'). Another is ''Perl: the Swiss Army Chainsaw of Programming Languages''. One stated design goal is to make easy tasks easy and difficult tasks possible. Its versatility permits versions of many programming paradigms: [[procedural programming|procedural]], [[functional programming|functional]], and [[Object Oriented Programming|object-oriented]] (though some claim that Perl is not a cleanly designed language because of its multiple paradigms). Perl has a powerful [[regular expression]] engine built directly into its syntax. Perl is often considered the archetypal [[scripting programming languages|scripting language]] and has been called the "glue that holds the web together", as it is one of the most popular [[Common Gateway Interface|CGI]] languages. Its function as a "glue language" can be described broadly as its ability to tie together different systems and interfaces that were not designed to interoperate.
+
+Perl is one of the [[programming language]] components of the popular [[LAMP]] free software platform for web development.
+
+Perl is [[free software movement|free software]], available under a combination of the ''[[Artistic License]]'' and the [[GPL]]. It is available for most [[operating system|operating systems]] but is particularly prevalent on [[Unix]] and [[Unix-like]] systems (e.g: [[Linux]] and [[FreeBSD]]), and is growing in popularity on [[Microsoft Windows]] systems. As an example of Perl in action, [[Wikipedia]] itself was a [[Common Gateway Interface|CGI]] script written in Perl until January [[2002]]. Another example is [[Slashdot]], which runs on the Perl-based [[Slashcode]] software. When used on the web, Perl is often used in conjunction with the [[Apache web server]] and its [[mod_perl]] module.
+
+Perl is regarded by both its proponents and detractors as something of a grab bag of features and syntax. The difference between the two camps lies in whether this is seen as a virtue or a vice. Perl votaries maintain that this varied heritage is what makes the language so useful. Reference is often made to natural languages such as [[English language|English]] and to [[evolution]]. For example, Larry Wall has argued that:
+
+:''... we often joke that a camel is a horse designed by a committee, but if you think about it, the camel is pretty well adapted for life in the desert. The camel has evolved to be relatively self-sufficient. On the other hand, the camel has not evolved to smell good. Neither has Perl.''
+
+In recognition of its ugly-but-useful nature, Perl has adopted the camel as its mascot.
+
+== Implementation ==
+A huge collection of freely usable [[perl module]]s, ranging from advanced mathematics to database connectivity, networking and more, can be downloaded from a network of sites called [[CPAN]], an [[Acronym|acronym]] for Comprehensive Perl Archive Network. Most or all of the software on CPAN is also available under either the [[Artistic License]], the [[GPL]], or both. CPAN.pm is also the name of the Perl module that downloads and installs other Perl modules from one of the CPAN mirror sites: such installations can be done with interactive prompts, or can be fully automated.
+
+Although Perl has most of the ease-of-use features of an interpreted language, it does not strictly interpret and execute source code one line at a time. Rather, perl (the program) first compiles an entire program to an intermediate [[byte code]] (much like [[Java programming language|Java's]] byte code), optimizing as it goes, and then executes that byte code. It is possible to compile a Perl program to byte code to save the compilation step on later executions, though the "interpreter" is still needed to execute that code.
+
+== Current version ==
+The current version, 5.8.5, includes [[Unicode]] support. Development of the next major release, Perl 6, is also underway. It will run on [[Parrot virtual machine|Parrot]], a [[virtual machine]] which is being developed as a possible multi-language target architecture.
+
+== Control structures ==
+The basic control structures do not differ greatly from those used in the [[C programming language|C]] or [[Java programming language|Java]] programming languages:
+
+''Loops''
+
+ while (''Boolean expression'') {
+     ''statement(s)''
+ }
+
+ do {
+     ''statement(s)''
+ } while (''Boolean expression'');
+
+ do {
+     ''statement(s)''
+ } until (''Boolean expression'');
+
+ for (''initialisation'' ; ''termination condition'' ; ''incrementing expr'') {
+     ''statement(s)''
+ }
+
+ foreach ( ''array'' ) {
+     ''statement(s)''
+ }
+
+
+''If-then-statements''
+
+ if (''Boolean expression'') {
+     ''statement(s)''
+ }
+
+ unless (''Boolean expression'') {
+     ''statement(s)''
+ }
+
+ if (''Boolean expression'') {
+     ''statement(s)''
+ } else {
+     ''statement(s)''
+ }
+
+ if (''Boolean expression'') {
+     ''statement(s)''
+ } elsif (''Boolean expression'') {
+     ''statement(s)''
+ }
+
+
+''For one-line statements, "until", "while" and "if" can also be used as follows'':
+ ''statement(s)'' until ''Boolean expression'';
+ ''statement(s)'' while ''Boolean expression'';
+ ''statement(s)'' if ''Boolean expression'';
+
+== Subroutines ==
+[[Subroutine]]s in Perl can be specified with the [[keyword]] 'sub'.  [[Variable]]s passed to a subroutine appear in the subroutine as elements of the local (to the subroutine) scalar array @_.  Calling a subroutine with three scalar variables results in array elements @_[0], @_[1], and @_[2] within the subroutine.  Note that these elements would be referred to as the scalars $_[0], $_[1], and $_[2]. Also shift can be used, without specifying @_, to obtain each value.
+
+Changes to elements in the @_ array within the subroutine are reflected in the  elements in the calling program.
+
+Subroutines naturally return the value of the last expression evaluated, though explicit use of the ''return'' statement is often encouraged for clarity.
+
+An example subroutine definition and call follows:
+
+ sub cube
+ {
+   my $x = shift;
+   $x * $x * $x;
+ }
+ ...
+ $z = -4;
+ $y = cube($z);
+ print "$y\n";
+
+Named parameters can be simulated by passing a hash.
+
+== Perl and [[SQL]] databases == 
+[[DBI/DBD]] modules can be used to access most [[ANSI]] [[SQL]] databases,
+including [[MySQL]], [[PostgreSQL]] and [[Oracle database|Oracle]].
+
+== Perl 5 ==
+Perl5, the most current production version of perl, is an interpreter which processes the text of a Perl script at runtime. Thus, the [[debugger]] is invoked directly from the command line with
+<pre>
+        perl -dw ScriptName.pl Argument1 ... ...
+</pre>
+Note that there is no limit to the number of arguments: Perl is polyadic;  any number of arguments can be passed to any Perl subroutine, in general. This concept of "no arbitrary limits" is present in most other parts of the language as well. Perl can read a ten million byte string into a variable, if the machine has the memory for it.
+
+== Perl 6 ==
+Perl6 is currently under development, and is planned to separate parsing, compilation and runtime, making a virtual machine that is more attractive to developers looking to port other languages to the architecture.
+
+[[Parrot virtual machine|Parrot]] is the Perl6 runtime, and can be programmed at a low level in [[Parrot assembly language]]. Parrot has existed in a limited form since December 2003. An increasing number of languages have been implemented to various degrees for the Parrot to be 'compiled' to Parrot assembly language opcodes. Besides a subset of the planned Perl6, these include [[BASIC programming language|BASIC]], [[Befunge]], [[Cola programming language|Cola]], [[Forth programming language|Forth]], [[Jako]], [[Ook!]], [[Plot programming language|Plot]], and even [[Python programming language|Python]], [[Ruby programming language|Ruby]], and [[Scheme]].
+
+== Perl code samples ==
+The canonical "[[hello world]]" program would be:
+
+ <nowiki>#</nowiki>!/usr/bin/perl -w
+ print "Hello world\n";
+
+The first line is the [[shebang]], which indicates the interpreter for Unix-like operating systems. The second line prints the string 'Hello world' and a [[newline]] (like a person pressing 'Return' or 'Enter').
+
+Some people humorously claim that Perl stands for "Pathologically Eclectic Rubbish Lister" due to its philosophy that there should be many ways to do the same thing, its growth by accretion, and its origins in report writing. 
+
+There are many other jokes, including the annual [[Obfuscated Perl contest]], which makes an arch virtue of Perl's [[syntax|syntactical]] flexibility. The following program, which prints a greeting that is modified by a [[regular expression]], is a mild example of this pastime:
+
+ <nowiki>#</nowiki> A sample Perl program
+ $_ =&nbsp;"Hello, world! The magic number is 234542354.\n";
+ print;
+ s/\d+/-1/;
+ print;
+
+Here is its output:
+
+ Hello, world! The magic number is 234542354.
+ Hello, world! The magic number is -1.
+
+<center>
+===Regular expressions with Perl examples===
+<p><table BORDER CELLPADDING="5" WIDTH="80%">
+<tr>
+<th>Regular Expression</th>
+<th>Description</th>
+<th>Example
+<br>Note that all the if statements return a TRUE value</th>
+</tr>
+
+<tr>
+<td>'''.'''</td>
+<td>Matches an arbitrary character, but not a newline.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/...../) {
+  print "$string1 has length >= 5\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>( )</td>
+<td>Groups a series of pattern elements to a single element.  When you match a pattern within parentheses, 
+you can use any of $1, $2, 
+... $9 later to refer to the previously matched pattern.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/(H..).(o..)/) {
+  print "We matched '$1' and '$2'\n";
+}
+
+<B>Output:</B>
+We matched 'Hel' and 'o W';
+</pre></td>
+</tr>
+
+<tr>
+<td>+</td>
+<td>Matches the preceding pattern element one or more times.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/l+/) {
+  print "There are one or more consecutive l's in $string1\n";
+}
+</pre></td>
+</tr>
+
+<tr>
+<td>?</td>
+<td>Matches zero or one times.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/H.?e/) {
+  print "There is an 'H' and a 'e' separated by ";
+  print "0-1 characters (Ex: He Hoe)\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>?</td>
+<td>Matches the *, +, or {M,N}'d regexp that comes before
+as few times as possible.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/(l+?o)/) {
+  print "The non-greedy match with one or more 'l' ";
+  print "followed by an 'o' is 'lo', not 'llo'.\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>*</td>
+<td>Matches zero or more times.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string =~ m/el*o/) {
+  print "There is a 'e' followed by zero to many";
+  print "'l' followed by 'o' (eo, elo, ello, elllo)\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>{M,N}</td>
+<td>Denotes the minimum M and the maximum N match count.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/l{1,2}/) {
+ print "There exists a substring with at least 1";
+ print "and at most 2 l's in $string1\n";
+}
+</pre>
+</td>
+</tr>
+    
+<tr>
+<td>[...]</td>
+<TD>Denotes a set of possible matches.</TD>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/[aeiou]+/) {
+  print "$string1 contains a one or more";
+  print "vowels\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>|</td>
+<td>Matches one of the left or right operand.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/(Hello|Hi)/) {
+  print "Hello or Hi is ";
+  print "contained in $string1";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>\b</td>
+<td>Matches a word boundary.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\bllo\b/) {
+  print "There is a word that starts with";
+  print " 'llo'\n";
+} else {
+  print "There are no words that start with";
+
+  print "'llo'\n";
+}
+
+</pre></td>
+</tr>
+    
+<tr>
+<td>\w</td>
+<td>Matches alphanumeric, including "_".</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\w/) {
+  print "There is at least one alpha-";
+  print "numeric char in $string1 (A-Z, a-z, 0-9, _)\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>\W</td>
+<td>Matches a non-alphanumeric character.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\W/) {
+  print "The space between Hello and ";
+  print "World is not alphanumeric\n";
+}
+</pre></td>
+</tr>
+
+<tr>
+<td>\s</td>
+<td>Matches a whitespace character (space, tab, newline, formfeed)</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\s.*\s/) {
+  print "There are TWO whitespace ";
+  print "characters separated by other characters in $string1";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>\S</td>
+<td>Matches anything BUT a whitespace.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\S.*\S/) {
+  print "There are TWO non-whitespace ";
+  print "characters separated by other characters in $string1";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>\d</td>
+<td>Matches a digit, same as [0-9].</td>
+<td align="left">
+<pre class="output">
+$string1 = "99 bottles of beer on the wall.";
+if ($string1 =~ m/(\d+)/) {
+  print "$1 is the first number in '$string1'\n";
+}
+
+<B>Output:</B>
+99 is the first number in '99 bottles of beer on the wall.'
+</pre></td>
+</tr>
+    
+<tr>
+<td>\D</td>
+<td>Matches a non-digit.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/\D/) {
+  print "There is at least one character in $string1";
+  print "that is not a digit.\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>^</td>
+<td>Matches the beginning of a line or string.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/^He/) {
+  print "$string1 starts with the characters 'He'\n";
+}
+</pre></td>
+</tr>
+    
+<tr>
+<td>$</td>
+<td>Matches the end of a line or string.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/rld$/) {
+  print "$string1 is a line or string";
+  print "that ends with 'rld'\n";
+}
+</pre></td>
+</tr>
+
+<tr>
+<td>[^...]</td>
+<td>Matches every character except the ones inside brackets.</td>
+<td align="left">
+<pre class="output">
+$string1 = "Hello World\n";
+if ($string1 =~ m/[^abc]/) {
+  print "$string1 does not contain the characters a, b, and c\n";
+}
+</pre></td>
+</tr>
+
+</table></center>
+
+Note that the 'm' in the above regular expressions, for example m/[^abc]/, is not required in order for perl to recognize the expression as a 'match' (cf. 'substitute': s/a/b/); /[^abc]/ could just as easily be used without the preceding 'm'. The 'm' operator can be used to alter the delimiting character; for example, m{/} may be used to enhance the legibility of patterns such as /\//. See 'perldoc perlre' for more details.
+
+In common with [[C programming language|C]], [[obfuscated code]] competitions are an interesting feature of the Perl culture.
+Similar to obfuscated code but with a different purpose, Perl [[Poetry]] is the practice of writing poems that can actually be compiled by perl. This practice is fairly unique to Perl, due to the large number of regular English words used in the language. New poems can regularly be seen [http://www.perlmonks.org/index.pl?node=Perl%20Poetry here].
+
+== Name ==
+
+"Perl" was originally named "pearl", after the "pearl of great price" of [[Gospel of Matthew|Matthew]] 13:46. Larry Wall wanted to give the language a short name with positive connotations, and claims he looked at (and rejected) every three- and four-letter word in the dictionary. He even thought of naming it after his wife Gloria.
+
+Before the language's official release, Wall discovered that there was already a programming language named "pearl", and changed the spelling of the name. Several [[backronym]]s have been suggested, including the humorous ''Pathologically Eclectic Rubbish Lister''. ''Practical Extraction and Report Language'' has prevailed in many of today's manuals, including the official Perl [[man page]]s. The name is normally capitalized ("Perl") when referring to the language, and uncapitalized ("perl") when referring to the interpreter program itself. (There is a saying in the Perl community that ''"Nothing but perl can parse Perl"''.) It is not appropriate to write "Perl" as "PERL" as it is not an [[acronym]].
+
+== Perl humor == 
+*[http://wikibooks.org/wiki/Programming:Perl_humour Perl humour on wikibooks]
+*[http://www.perl.com/pub/a/2003/07/16/soto2003.html State of the Onion 2003 (Larry Wall on Perl 6)]
+*[http://www.cmpe.boun.edu.tr/~kosar/other/lwall.html Larry Wall quotes]
+*[http://search.cpan.org/~dconway/Lingua-Romana-Perligata-0.50/lib/Lingua/Romana/Perligata.pm Lingua::Romana::Perligata - Write Perl in Latin!]
+*[http://www.softpanorama.org/Bulletin/Humor/humor092.html Perl Purity Test]
+
+== See also ==
+* [[Just another Perl hacker]]
+* [[Obfuscated Perl contest]]
+* [[POE]] -- Perl Object Environment
+* [[Fibonacci number program]]
+* [[Perl poetry]]
+
+== External links ==
+* [http://www.perl.com/ Perl.com]
+* [http://dmoz.org/Computers/Programming/Languages/Perl/ dmoz on Perl]
+* [http://www.perl.org/ Perl.org]
+* [http://www.pm.org/ Perl Mongers user group site]
+* [http://www.perlmonks.org/ The Perl Monastery]
+* [http://activestate.com/ ActiveState - Perl for Microsoft Windows platforms]
+* [http://www.indigostar.com/ IndigoStar], home of [http://www.indigostar.com/indigoperl.htm IndigoPerl], another distribution of Perl for the [[Microsoft Windows]] platform
+* [http://www.cpan.org/ CPAN - Comprehensive Perl Archive Network]
+* [http://search.cpan.org/ Search the Comprehensive Perl Archive Network]
+* [http://dev.perl.org/perl6/ Perl 6 development]
+* [http://www.parrotcode.org/ Parrot virtual machine]
+* [http://www.perldoc.com/ Perl POD documentation]
+* [http://www.wired.com/wired/archive/8.10/cruise_pr.html ''Scripting on the Lido Deck'' by Steve Silberman, Wired Magazine article about Perl Whirl 2000]
+* [http://www.linuxjournal.com/article.php?sid=3394 Interview with Larry Wall on Perl (May 01, 1999)]
+* [http://history.perl.org/PerlTimeline.html Perl Timeline]
+* [http://groups.google.com/groups?selm=4628%40sdcrdcf.UUCP First reference to "Perl" on Usenet]
+
+===Books===
+*[[Programming Perl]] (often called the ''Camel book'') ([http://safari.oreilly.com/JVXSL.asp?x=1&mode=section&sortKey=title&sortOrder=asc&view=&xmlid=0-596-00027-8&open=false&g=&srchText=BOOK+AND+%28AUTHOR+Larry+Wall%29&code=&h=&m=&l=1&catid=&s=1&b=1&f=1&t=1&c=1&u=1&r=&o=1&page=0 read online])
+* [[Perl Cookbook]] (read online: [http://safari.oreilly.com/JVXSL.asp?x=1&mode=section&sortKey=title&sortOrder=asc&view=&xmlid=0-596-00313-7&open=false&g=&srchText=BOOK+AND+%28BOOKTITLE+perl+cookbook%29&code=&h=&m=&l=1&catid=&s=1&b=1&f=1&t=1&c=1&u=1&r=&o=1&page=0 2nd edition] [http://safari.oreilly.com/JVXSL.asp?x=1&mode=section&sortKey=title&sortOrder=asc&view=&xmlid=1-56592-243-3&open=false&g=&srchText=BOOK+AND+%28BOOKTITLE+perl+cookbook%29&code=&h=&m=&l=1&catid=&s=1&b=1&f=1&t=1&c=1&u=1&r=&o=1&page=0 1st edition]).
+*[[Learning Perl]] (also called the ''Llama book'')
+
+{{List_of_programming_languages}}
+
+[[cs:Perl]]
+[[de:Perl]]
+[[eo:Perl Komputillingvo]]
+[[es:Perl]]
+[[et:Perl]]
+[[fi:Perl]]
+[[fr:Perl (langage)]]
+[[it:Perl]]
+[[ja:Perl]]
+[[lt:Perl]]
+[[nl:Perl]]
+[[pl:Perl]]
+[[pt:Perl]]
+[[sv:Perl]]
