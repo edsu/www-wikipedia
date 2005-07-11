@@ -8,9 +8,10 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.5';
+our $VERSION = '1.6';
 
-use constant WIKIPEDIA_URL => 'http://%s.wikipedia.org';
+use constant WIKIPEDIA_URL =>
+    'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
 
 =head1 NAME
 
@@ -72,8 +73,8 @@ sub new {
     my $self = LWP::UserAgent->new( %opts );
     $self->agent( 'WWW::Wikipedia' );
     bless $self, ref($class) || $class;
-    $self->language( $language );
 
+    $self->language( $language );
     return $self;
 }
 
@@ -91,10 +92,8 @@ language codes should be used. The default is 'en'.
 
 sub language {
     my( $self, $language) = @_;
-
-    $self->{ src } = sprintf( WIKIPEDIA_URL, $language ) if $language;
-    $self->{ src } =~ /http:\/\/(..)/;
-    return $1;
+    $self->{ language } = $language if $language;
+    return $self->{ language };
 }
 
 =head2 search() 
@@ -117,9 +116,9 @@ sub search {
 
     croak( "search() requires you pass in a string" ) if ! defined( $string );
     $string = escape( $string );
-    my $src = $self->{ src };
+    my $src = sprintf( WIKIPEDIA_URL, $self->language(), $string );
 
-    my $response = $self->get( "$src/wiki/$string?action=raw" );
+    my $response = $self->get($src);
     if ( $response->is_success() ) {
 	my $entry = WWW::Wikipedia::Entry->new( $response->content(), $src );
 	return( $entry );

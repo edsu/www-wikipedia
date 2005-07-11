@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.6     Mon Jul 11 15:25:10 CDT 2005
+        - updated WWW::Wikipedia to use the new raw url (thanks Katrin Tomanek)
+
 1.5     Wed Mar 23 08:46:03 2005
 	- added language option (-l) to bin/wikipedia
 	- added pod and pod_coverage tests
