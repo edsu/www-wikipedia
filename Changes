@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.7     Fri Jul 15 14:12:22 CDT 2005
+        - avoid passing "\n" to Text::Autoformat::autoformat() since it 
+          blows chunks in v1.13 (thanks Tom Halford)
+
 1.6     Mon Jul 11 15:25:10 CDT 2005
         - updated WWW::Wikipedia to use the new raw url (thanks Katrin Tomanek)
 

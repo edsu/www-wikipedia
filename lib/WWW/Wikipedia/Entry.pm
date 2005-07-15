@@ -240,6 +240,8 @@ sub _parse {
 
 sub _pretty {
     my $text = shift;
+    # Text::Autoformat chokes on "\n"
+    return '' if $text eq "\n";
     return autoformat( $text, {
         left        => 0,
         right       => 80,
