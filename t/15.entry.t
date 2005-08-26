@@ -25,20 +25,14 @@ is( $entry->related(), 91, 'related()' );
 is( $entry->raw(), $wikitext, 'raw()' );
 
 ## test spanish text
-
 $wikitext = getWikiText( 'perl.es.raw' );
 $entry    = WWW::Wikipedia::Entry->new( $wikitext, 'http://es.wikipedia.org/wiki/Perl' );
 isa_ok( $entry, 'WWW::Wikipedia::Entry' );
-
-is( $entry->text(), undef, 'text()' ); 
-
+ok( $entry->text(), 'text()' ); 
 is( $entry->headings(), 0, 'headings()' );
-
 @categories = $entry->categories();
 is( $categories[0], "Lenguajes interpretados", 'categories()' );
-
 is( $entry->related(), 36, 'related()' );
-
 is( $entry->raw(), $wikitext, 'raw()' );
 
 ## fetches some wikitext from disk

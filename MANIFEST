@@ -9,6 +9,7 @@ t/11.language.t
 t/15.entry.t
 t/20.search.t
 t/25.search_error.t
+t/26.autoformat.t
 t/30.ua.t
 t/98.pod.t
 t/99.pod_coverage.t

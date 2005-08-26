@@ -1,5 +1,11 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.8     Fri Aug 26 12:52:09 CDT 2005
+        - avoid passing in any sequence of \n to autoformamt since it
+          barfs on that as well in v1.13 (thanks Steve Freedman)
+        - when there is no summary paragraph in an entry, a call to text()
+          will return the fulltext for an entry.
+
 1.7     Fri Jul 15 14:12:22 CDT 2005
         - avoid passing "\n" to Text::Autoformat::autoformat() since it 
           blows chunks in v1.13 (thanks Tom Halford)

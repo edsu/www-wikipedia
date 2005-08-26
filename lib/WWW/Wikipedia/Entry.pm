@@ -59,7 +59,8 @@ sub new {
 
 The brief text for the entry. This will provide the first paragraph of 
 text; basically everything up to the first heading. Ordinarily this will
-be what you want to use.
+be what you want to use. When there doesn't appear to be summary text you 
+will be returned the fulltext instead.
 
 If text() returns nothing then you probably are looking at a disambiguation
 entry, and should use related() to lookup more specific entries.
@@ -67,7 +68,9 @@ entry, and should use related() to lookup more specific entries.
 =cut
 
 sub text {
-    return( shift->{text} );
+    my $self = shift;
+    return $self->{text} if $self->{text};
+    return $self->fulltext();
 }
 
 =head2 fulltext()
@@ -78,7 +81,7 @@ Returns the full text for the entry, which can be extensive.
 
 sub fulltext {
     my $self = shift;
-    return $self->{fulltext};
+    return $self->{fulltext}; 
 }
 
 =head2 related()
@@ -240,8 +243,8 @@ sub _parse {
 
 sub _pretty {
     my $text = shift;
-    # Text::Autoformat chokes on "\n"
-    return '' if $text eq "\n";
+    # Text::Autoformat v1.13 chokes on strings that are one or more "\n"
+    return '' if $text =~ m/^\n+$/;
     return autoformat( $text, {
         left        => 0,
         right       => 80,

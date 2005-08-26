@@ -1,7 +1,7 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         WWW-Wikipedia
-version:      1.7
+version:      1.8
 version_from: lib/WWW/Wikipedia.pm
 installdirs:  site
 requires:

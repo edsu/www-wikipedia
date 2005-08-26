@@ -23,11 +23,6 @@ my $entry = $wiki->search( 'perl' );
 isa_ok( $entry, 'WWW::Wikipedia::Entry' );
 ok( length($entry->text()) > 0, 'text()' );
 
-# this entry has triggers some faulty code in Text::Autoformat 1.13 which 
-# we avoid (hopefully)
-$entry = $wiki->search('princeton');
-
-
 # test language 'es'
 $wiki = WWW::Wikipedia->new( language => 'es' );
 isa_ok( $wiki, 'WWW::Wikipedia' );
