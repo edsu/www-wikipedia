@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.9     Tue Apr 18 05:37:06 CDT 2006
+        - handle wikipedia style redirects when the raw content looks like
+          #REDIRECT [[systems theory]]
+
 1.8     Fri Aug 26 12:52:09 CDT 2005
         - avoid passing in any sequence of \n to autoformamt since it
           barfs on that as well in v1.13 (thanks Steve Freedman)
