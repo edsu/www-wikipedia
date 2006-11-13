@@ -12,6 +12,8 @@ our $VERSION = '1.9';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
+use constant WIKIPEDIA_RAND_URL =>
+    'http://%s.wikipedia.org/wiki/Special:Random';
 
 =head1 NAME
 
@@ -131,6 +133,28 @@ sub search {
 	return undef;
     }
 
+}
+
+=head2 random()
+
+This method fetches a random wikipedia page.
+
+=cut
+
+sub random {
+    my( $self )  = @_;
+    my $src      = sprintf( WIKIPEDIA_RAND_URL, $self->language() );
+    my $response = $self->get( $src );
+
+    if( $response->is_success() ) {
+        # get the raw version of the current url
+        $src = $response->request->uri . '?action=raw';
+        $response = $self->get( $src );
+        return WWW::Wikipedia::Entry->new( $response->content(), $src );
+    }
+
+    $self->error( "uhoh, WWW::Wikipedia unable to contact " . $src );
+    return;
 }
 
 =head2 error()
