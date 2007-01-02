@@ -5,6 +5,7 @@ WriteMakefile(
     VERSION_FROM	=> 'lib/WWW/Wikipedia.pm',
     ABSTRACT_FROM	=> 'lib/WWW/Wikipedia.pm', 
     AUTHOR		=> 'Ed Summers <ehs@pobox.com>',
+    LICENSE             => 'perl',
     EXE_FILES           => [ qw( bin/wikipedia ) ],
     PREREQ_PM		=> 
 			    {

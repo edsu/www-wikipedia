@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.92    Tue Jan  2 10:07:33 EST 2007
+        - a random() method was added in 1.91
+        - added parse_head(0) to squash some warnings
+
 1.91    Tue Jan  2 07:14:44 EST 2007
         - redirects no longer case sensitive (thanks Chris Bolt)
 

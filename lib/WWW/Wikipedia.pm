@@ -8,7 +8,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.91';
+our $VERSION = '1.92';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -77,6 +77,7 @@ sub new {
     bless $self, ref($class) || $class;
 
     $self->language( $language );
+    $self->parse_head( 0 );
     return $self;
 }
 
