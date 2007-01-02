@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.91    Tue Jan  2 07:14:44 EST 2007
+        - redirects no longer case sensitive (thanks Chris Bolt)
+
 1.9     Tue Apr 18 05:37:06 CDT 2006
         - handle wikipedia style redirects when the raw content looks like
           #REDIRECT [[systems theory]]
