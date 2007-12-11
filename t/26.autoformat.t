@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More qw( no_plan );
+use Test::More tests => 2;
 use WWW::Wikipedia;
 
 # Text::Autoformat has had some bugs which some wikipedia content
