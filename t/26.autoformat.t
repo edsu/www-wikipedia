@@ -1,6 +1,7 @@
+use strict;
+use warnings;
 use Test::More qw( no_plan );
 use WWW::Wikipedia;
-use strict;
 
 # Text::Autoformat has had some bugs which some wikipedia content
 # has been known to trigger. Make sure we cover those bases.

@@ -1,6 +1,7 @@
 Revision history for Perl extension WWW::Wikipedia.
 
 1.93    Tue Dec 11 2007
+        - add a setting to control the following of redirect directives
         - switch to Module::Install
 
 1.92    Tue Jan  2 10:07:33 EST 2007

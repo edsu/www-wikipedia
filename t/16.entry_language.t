@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More qw( no_plan );
+use Test::More tests => 7;
 
 use_ok( 'WWW::Wikipedia::Entry' );
 

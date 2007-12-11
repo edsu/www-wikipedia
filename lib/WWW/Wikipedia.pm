@@ -74,19 +74,25 @@ you have full access.
     my $wiki = WWW::Wikipedia->new();
     $wiki->timeout( 2 );
 
+
+You can turn off the following of wikipedia redirect directives by passing
+a false value to C<follow_redirects>.
+
 =cut
 
 sub new {
     my ( $class, %opts ) = @_;
 
-    my $language = $opts{ language } || 'en';
-    delete $opts{ language };
+    my $language = delete $opts{ language } || 'en';
+    my $follow = delete $opts{ follow_redirects };
+    $follow = 1 if !defined $follow;
 
     my $self = LWP::UserAgent->new( %opts );
     $self->agent( 'WWW::Wikipedia' );
     bless $self, ref( $class ) || $class;
 
     $self->language( $language );
+    $self->follow_redirects( $follow );
     $self->parse_head( 0 );
     return $self;
 }
@@ -107,6 +113,19 @@ sub language {
     my ( $self, $language ) = @_;
     $self->{ language } = $language if $language;
     return $self->{ language };
+}
+
+=head2 follow_redirects()
+
+By default, wikipeda redirect directives are followed. Set this to false to
+turn that off.
+
+=cut
+
+sub follow_redirects {
+    my ( $self, $value ) = @_;
+    $self->{ follow_redirects } = $value if defined $value;
+    return $self->{ follow_redirects };
 }
 
 =head2 search() 
@@ -136,7 +155,9 @@ sub search {
         my $entry = WWW::Wikipedia::Entry->new( $response->content(), $src );
 
         # look for a wikipedia style redirect and process if necessary
-        return $self->search( $1 ) if $entry->text() =~ /^#REDIRECT (.*)/i;
+        return $self->search( $1 )
+            if $self->follow_redirects
+                && $entry->text() =~ /^#REDIRECT (.*)/i;
 
         return ( $entry );
     }
@@ -207,13 +228,9 @@ sub error {
 
 =head1 AUTHORS
 
-=over 4
+Ed Summers E<lt>ehs@pobox.comE<gt>
 
-=item * Ed Summers E<lt>ehs@pobox.comE<gt>
-
-=item * Brian Cassidy E<lt>bricas@cpan.orgE<gt>
-
-=back
+Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 

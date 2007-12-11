@@ -264,13 +264,9 @@ sub _pretty {
 
 =head1 AUTHORS
 
-=over 4
+Ed Summers E<lt>ehs@pobox.comE<gt>
 
-=item * Ed Summers E<lt>ehs@pobox.comE<gt>
-
-=item * Brian Cassidy E<lt>bricas@cpan.orgE<gt>
-
-=back
+Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =cut
 
