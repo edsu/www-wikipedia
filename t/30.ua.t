@@ -8,4 +8,3 @@ use_ok( 'WWW::Wikipedia' );
 my $wiki = WWW::Wikipedia->new();
 isa_ok( $wiki, 'LWP::UserAgent' );
 
-

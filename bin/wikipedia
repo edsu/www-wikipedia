@@ -34,14 +34,14 @@ my %options;
 getopts( 'l:', \%options );
 
 my $term = shift;
-pod2usage( { verbose => 1 } ) if ! defined( $term );
+pod2usage( { verbose => 1 } ) if !defined( $term );
 
 my $wiki = WWW::Wikipedia->new( language => $options{ l } || 'en' );
 my $entry = $wiki->search( $term );
 
 ## use a pager if we can
 eval( 'use IO::Page' );
-if ( $entry ) { 
+if ( $entry ) {
     my $text = $entry->text();
     if ( $text ) { print $text; }
     else {

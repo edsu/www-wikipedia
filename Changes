@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.93    Tue Dec 11 2007
+        - switch to Module::Install
+
 1.92    Tue Jan  2 10:07:33 EST 2007
         - a random() method was added in 1.91
         - added parse_head(0) to squash some warnings

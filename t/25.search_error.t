@@ -5,7 +5,7 @@ package WWW::Wikipedia;
 use HTTP::Response;
 
 sub get {
-	return HTTP::Response->new( 500 );
+    return HTTP::Response->new( 500 );
 }
 
 package main;

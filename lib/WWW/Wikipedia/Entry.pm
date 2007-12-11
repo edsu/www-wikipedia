@@ -36,9 +36,9 @@ behind the scenes with the correct arguments by WWW::Wikipedia::search().
 
 sub new {
     my ( $class, $raw, $src ) = @_;
-    return if length($raw) == 0;
-    my $self = bless { 
-        raw         => $raw, 
+    return if length( $raw ) == 0;
+    my $self = bless {
+        raw         => $raw,
         src         => $src,
         text        => '',
         fulltext    => '',
@@ -46,13 +46,14 @@ sub new {
         related     => [],
         categories  => [],
         headings    => [],
-	languages   => {},
-	currentlang => ''
-        }, ref($class) || $class;
+        languages   => {},
+        currentlang => ''
+        },
+        ref( $class ) || $class;
     $self->_parse();
-    $self->{fulltext} = _pretty( $self->{fulltext} );
-    $self->{text} = _pretty( $self->{text} );
-    return( $self );
+    $self->{ fulltext } = _pretty( $self->{ fulltext } );
+    $self->{ text }     = _pretty( $self->{ text } );
+    return ( $self );
 }
 
 =head2 text()
@@ -69,7 +70,7 @@ entry, and should use related() to lookup more specific entries.
 
 sub text {
     my $self = shift;
-    return $self->{text} if $self->{text};
+    return $self->{ text } if $self->{ text };
     return $self->fulltext();
 }
 
@@ -81,7 +82,7 @@ Returns the full text for the entry, which can be extensive.
 
 sub fulltext {
     my $self = shift;
-    return $self->{fulltext}; 
+    return $self->{ fulltext };
 }
 
 =head2 related()
@@ -92,7 +93,7 @@ entry text.
 =cut
 
 sub related {
-    return( @{ shift->{ related } } );
+    return ( @{ shift->{ related } } );
 }
 
 =head2 categories()
@@ -103,7 +104,7 @@ of the Programming languages category.
 =cut
 
 sub categories {
-    return( @{ shift->{ categories } } );
+    return ( @{ shift->{ categories } } );
 }
 
 =head2 headings()
@@ -113,7 +114,7 @@ Returns a list of headings used in the entry.
 =cut
 
 sub headings {
-    return( @{ shift->{headings} } );
+    return ( @{ shift->{ headings } } );
 }
 
 =head2 raw()
@@ -127,7 +128,6 @@ sub raw {
     return $self->{ raw };
 }
 
-
 =head2 language()
 
 With no parameters, it will return the current language of the entry. By
@@ -137,14 +137,14 @@ language, if available.
 =cut
 
 sub language {
-	my $self = shift;
-	my $lang = shift;
+    my $self = shift;
+    my $lang = shift;
 
-	return $self->{ currentlang } unless defined $lang;
-	return undef unless exists $self->{ languages }->{ $lang };
+    return $self->{ currentlang } unless defined $lang;
+    return undef unless exists $self->{ languages }->{ $lang };
 
-	my $wiki  = WWW::Wikipedia->new( language => $lang );
-	return $wiki->search( $self->{ languages }->{ $lang } );
+    my $wiki = WWW::Wikipedia->new( language => $lang );
+    return $wiki->search( $self->{ languages }->{ $lang } );
 }
 
 =head2 languages()
@@ -155,11 +155,10 @@ this entry is available.
 =cut
 
 sub languages {
-	my $self = shift;
+    my $self = shift;
 
-	return keys %{ $self->{ languages } };
+    return keys %{ $self->{ languages } };
 }
-
 
 ## messy internal routine for barebones parsing of wikitext
 
@@ -169,87 +168,98 @@ sub _parse {
     my $src  = $self->{ src };
 
     # Add current language
-    my( $lang ) = ( $src =~ /http:\/\/(..)/ );
-    my $title   = ( split( /\//, $src ) )[ -1 ];
+    my ( $lang ) = ( $src =~ /http:\/\/(..)/ );
+    my $title = ( split( /\//, $src ) )[ -1 ];
 
     $self->{ currentlang } = $lang;
     $self->{ languages }->{ $lang } = $title;
 
-    for ( $self->{cursor}=0; $self->{cursor}<length($raw); 
-        $self->{cursor}++ ) {
+    for (
+        $self->{ cursor } = 0;
+        $self->{ cursor } < length( $raw );
+        $self->{ cursor }++
+        )
+    {
 
-        pos( $raw ) = $self->{cursor};
+        pos( $raw ) = $self->{ cursor };
 
         ## [[ ... ]]
-        if ( $raw =~ /\G\[\[ *(.*?) *\]\]/ ) { 
+        if ( $raw =~ /\G\[\[ *(.*?) *\]\]/ ) {
             my $directive = $1;
-            $self->{cursor} += length($&)-1;
+            $self->{ cursor } += length( $& ) - 1;
             if ( $directive =~ /\:/ ) {
                 my ( $type, $text ) = split /:/, $directive;
                 if ( lc( $type ) eq 'category' ) {
-                    push( @{ $self->{categories} }, $text );
+                    push( @{ $self->{ categories } }, $text );
                 }
+
                 # language codes
-		if ( length( $type ) == 2 and lc( $type ) eq $type ) {
-		    $self->{ languages }->{ $type } = $text;
-		}
-            } elsif ( $directive =~ /\|/ ) {
+                if ( length( $type ) == 2 and lc( $type ) eq $type ) {
+                    $self->{ languages }->{ $type } = $text;
+                }
+            }
+            elsif ( $directive =~ /\|/ ) {
                 my ( $lookup, $name ) = split /\|/, $directive;
-                $self->{fulltext} .= $name;
-                push( @{ $self->{related} }, $lookup ) if $lookup !~ /^#/;
-            } else {
-                $self->{fulltext} .= $directive;
-                push( @{ $self->{related} }, $directive );
+                $self->{ fulltext } .= $name;
+                push( @{ $self->{ related } }, $lookup ) if $lookup !~ /^#/;
+            }
+            else {
+                $self->{ fulltext } .= $directive;
+                push( @{ $self->{ related } }, $directive );
             }
         }
 
         ## === heading 2 ===
         elsif ( $raw =~ /\G=== *(.*?) *===/ ) {
             ### don't bother storing these headings
-            $self->{fulltext} .= $1;
-            $self->{cursor} += length($&)-1;
+            $self->{ fulltext } .= $1;
+            $self->{ cursor } += length( $& ) - 1;
             next;
         }
 
-        ## == heading 1 == 
-        elsif ( $raw =~ /\G== *(.*?) *==/ ) { 
-            push( @{ $self->{headings} }, $1 );
-            $self->{text} = $self->{fulltext} if ! $self->{seenHeading};
-            $self->{seenHeading} = 1;
-            $self->{fulltext} .= $1;
-            $self->{cursor} += length($&)-1;
+        ## == heading 1 ==
+        elsif ( $raw =~ /\G== *(.*?) *==/ ) {
+            push( @{ $self->{ headings } }, $1 );
+            $self->{ text } = $self->{ fulltext } if !$self->{ seenHeading };
+            $self->{ seenHeading } = 1;
+            $self->{ fulltext } .= $1;
+            $self->{ cursor } += length( $& ) - 1;
             next;
         }
 
         ## '' italics ''
         elsif ( $raw =~ /\G'' *(.*?) *''/ ) {
-            $self->{fulltext} .= $1;
-            $self->{cursor} += length($&)-1;
+            $self->{ fulltext } .= $1;
+            $self->{ cursor } += length( $& ) - 1;
             next;
         }
 
         ## {{ disambig }}
-        elsif ( $raw =~ /\G{{ *(.*?) *}}/ ) { 
+        elsif ( $raw =~ /\G{{ *(.*?) *}}/ ) {
             ## ignore for now
-            $self->{cursor} += length($&)-1;
+            $self->{ cursor } += length( $& ) - 1;
             next;
         }
 
         else {
-            $self->{fulltext} .= substr( $raw, $self->{cursor}, 1 );
+            $self->{ fulltext } .= substr( $raw, $self->{ cursor }, 1 );
         }
     }
 }
 
 sub _pretty {
     my $text = shift;
+
     # Text::Autoformat v1.13 chokes on strings that are one or more "\n"
     return '' if $text =~ m/^\n+$/;
-    return autoformat( $text, {
-        left        => 0,
-        right       => 80,
-        justify     => 'left',
-        all         => 1 } );
+    return autoformat(
+        $text,
+        {   left    => 0,
+            right   => 80,
+            justify => 'left',
+            all     => 1
+        }
+    );
 }
 
 =head1 AUTHORS
