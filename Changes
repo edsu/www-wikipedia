@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.94    Mon Feb 25 2008
+        - Fix random() to get the proper url for the raw content
+
 1.93    Tue Dec 11 2007
         - add a setting to control the following of redirect directives
         - switch to Module::Install

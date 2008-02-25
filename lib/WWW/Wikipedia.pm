@@ -8,7 +8,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.93';
+our $VERSION = '1.94';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -180,9 +180,9 @@ sub random {
     my $response = $self->get( $src );
 
     if ( $response->is_success() ) {
-
         # get the raw version of the current url
-        $src      = $response->request->uri . '?action=raw';
+        my( $title ) = $response->request->uri =~ m{\.org/wiki/(.+)$};
+        $src      = sprintf( WIKIPEDIA_URL, $self->language(), $title );
         $response = $self->get( $src );
         return WWW::Wikipedia::Entry->new( $response->content(), $src );
     }
