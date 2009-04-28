@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.95    XXX
+        - Swap CGI for URI::Escape
+
 1.94    Mon Feb 25 2008
         - Fix random() to get the proper url for the raw content
 

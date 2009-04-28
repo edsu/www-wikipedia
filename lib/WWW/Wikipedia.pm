@@ -3,12 +3,12 @@ package WWW::Wikipedia;
 use strict;
 use warnings;
 use Carp qw( croak );
-use CGI qw( escape );
+use URI::Escape ();
 use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.94';
+our $VERSION = '1.95';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -147,7 +147,7 @@ sub search {
     $self->error( undef );
 
     croak( "search() requires you pass in a string" ) if !defined( $string );
-    $string = escape( $string );
+    $string = URI::Escape::uri_escape( $string );
     my $src = sprintf( WIKIPEDIA_URL, $self->language(), $string );
 
     my $response = $self->get( $src );

@@ -8,7 +8,7 @@ name 'WWW-Wikipedia';
 all_from 'lib/WWW/Wikipedia.pm';
 
 requires 'LWP::UserAgent';
-requires 'CGI';
+requires 'URI';
 requires 'Text::Autoformat';
 
 test_requires 'Test::More';
