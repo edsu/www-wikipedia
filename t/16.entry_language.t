@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More tests => 10;
 
 use_ok( 'WWW::Wikipedia::Entry' );
 
@@ -18,6 +18,14 @@ isa_ok( $entry_es, 'WWW::Wikipedia::Entry' );
 
 ok( $entry_es->languages() > 0, 'languages()' );
 is( $entry_es->language(), 'es', 'language()' );
+
+{
+    my $ru = WWW::Wikipedia->new->search( 'Russia' );
+    isa_ok( $ru, 'WWW::Wikipedia::Entry' );
+    my $ru_ru = $ru->language( 'ru' );
+    isa_ok( $ru_ru, 'WWW::Wikipedia::Entry' );
+    ok( $ru_ru->text, 'Page for Russia in Russian' );
+}
 
 ## fetches some wikitext from disk
 sub getWikiText {
