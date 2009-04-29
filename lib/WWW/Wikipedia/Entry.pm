@@ -268,6 +268,13 @@ Ed Summers E<lt>ehs@pobox.comE<gt>
 
 Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2003-2009 by Ed Summers
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself. 
+
 =cut
 
 1;

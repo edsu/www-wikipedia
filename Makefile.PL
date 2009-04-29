@@ -1,4 +1,4 @@
-use inc::Module::Install 0.68;
+use inc::Module::Install 0.85;
 
 if ( -e 'MANIFEST.SKIP' ) {
     system( 'pod2text lib/WWW/Wikipedia.pm > README' );
@@ -15,5 +15,4 @@ test_requires 'Test::More';
 
 install_script 'bin/wikipedia';
 
-auto_install;
 WriteAll;
