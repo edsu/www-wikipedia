@@ -51,6 +51,11 @@ sub new {
         },
         ref( $class ) || $class;
     $self->_parse();
+
+    # store un-"pretty"-ed version of text
+    $self->{ fulltext_basic } = $self->{ fulltext };
+    $self->{ text_basic }     = $self->{ text };
+
     $self->{ fulltext } = _pretty( $self->{ fulltext } );
     $self->{ text }     = _pretty( $self->{ text } );
     return ( $self );
@@ -74,6 +79,18 @@ sub text {
     return $self->fulltext();
 }
 
+=head2 text_basic()
+
+The same as C<text()>, but not run through Text::Autoformat.
+
+=cut
+
+sub text_basic {
+    my $self = shift;
+    return $self->{ text_basic } if $self->{ text_basic };
+    return $self->fulltext_basic();
+}
+
 =head2 fulltext()
 
 Returns the full text for the entry, which can be extensive.
@@ -83,6 +100,17 @@ Returns the full text for the entry, which can be extensive.
 sub fulltext {
     my $self = shift;
     return $self->{ fulltext };
+}
+
+=head2 fulltext_basic()
+
+The same as C<fulltext()>, but not run through Text::Autoformat.
+
+=cut
+
+sub fulltext_basic {
+    my $self = shift;
+    return $self->{ fulltext_basic };
 }
 
 =head2 related()

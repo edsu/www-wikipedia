@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.96    Mon Sep 14 2009
+        - Add text_basic() and fulltext_basic() to Entry, which are the
+          same as the non _basic methods, but not run through Text::Autoformat
+
 1.95    Wed Apr 29 2009
         - Swap out CGI for URI::Escape
 

@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 13;
+use Test::More tests => 14;
 
 use_ok( 'WWW::Wikipedia::Entry' );
 
@@ -15,6 +15,7 @@ isa_ok( $entry, 'WWW::Wikipedia::Entry' );
 my $text = $entry->text();
 like( $text, qr/'Perl', also 'Practical Extraction and Report Language'/,
     'text()' );
+ok( $entry->text_basic(), 'text_basic()' );
 
 is( $entry->headings(), 13, 'headings()' );
 
