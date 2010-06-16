@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.97    Wed Jun 16 2010
+        - Update redirect regex due to wikipedia changes (RT #58440)
+
 1.96    Mon Sep 14 2009
         - Add text_basic() and fulltext_basic() to Entry, which are the
           same as the non _basic methods, but not run through Text::Autoformat

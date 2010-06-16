@@ -8,7 +8,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.96';
+our $VERSION = '1.97';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -157,7 +157,7 @@ sub search {
         # look for a wikipedia style redirect and process if necessary
         return $self->search( $1 )
             if $self->follow_redirects
-                && $entry->text() =~ /^#REDIRECT (.*)/i;
+                && $entry->text() =~ /^#REDIRECT (.*)/is;
 
         return ( $entry );
     }
@@ -234,7 +234,7 @@ Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2009 by Ed Summers
+Copyright 2003-2010 by Ed Summers
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
