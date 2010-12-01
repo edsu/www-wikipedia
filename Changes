@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.98    Wed Dec 01 2010
+        - Remove newline that was attached to redirects returned by search()
+
 1.97    Wed Jun 16 2010
         - Update redirect regex due to wikipedia changes (RT #58440)
 
