@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+1.99    Wed Feb 16 2011
+        - Fix up title in entry and provide an accessor for the value
+        - use uri_escape_utf8 in search() as needed
+
 1.98    Wed Dec 01 2010
         - Remove newline that was attached to redirects returned by search()
 

@@ -8,7 +8,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.98';
+our $VERSION = '1.99';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -147,7 +147,10 @@ sub search {
     $self->error( undef );
 
     croak( "search() requires you pass in a string" ) if !defined( $string );
-    $string = URI::Escape::uri_escape( $string );
+    
+    $string = utf8::is_utf8( $string )
+        ? URI::Escape::uri_escape_utf8( $string )
+        : URI::Escape::uri_escape( $string );
     my $src = sprintf( WIKIPEDIA_URL, $self->language(), $string );
 
     my $response = $self->get( $src );
@@ -234,7 +237,7 @@ Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2010 by Ed Summers
+Copyright 2003-2011 by Ed Summers
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

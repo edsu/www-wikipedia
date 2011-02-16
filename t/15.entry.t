@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 14;
+use Test::More tests => 16;
 
 use_ok( 'WWW::Wikipedia::Entry' );
 
@@ -23,8 +23,8 @@ my @categories = $entry->categories();
 is( $categories[ 0 ], "Programming languages", 'categories()' );
 
 is( $entry->related(), 91, 'related()' );
-
 is( $entry->raw(), $wikitext, 'raw()' );
+is( $entry->title(), 'Perl', 'title()' );
 
 ## test spanish text
 $wikitext = getWikiText( 'perl.es.raw' );
@@ -37,6 +37,7 @@ is( $entry->headings(), 0, 'headings()' );
 is( $categories[ 0 ],  "Lenguajes interpretados", 'categories()' );
 is( $entry->related(), 36,                        'related()' );
 is( $entry->raw(),     $wikitext,                 'raw()' );
+is( $entry->title(), 'Perl', 'title()' );
 
 ## fetches some wikitext from disk
 sub getWikiText {

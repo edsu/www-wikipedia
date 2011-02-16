@@ -113,6 +113,18 @@ sub fulltext_basic {
     return $self->{ fulltext_basic };
 }
 
+
+=head2 title()
+
+Returns a title of the entry.
+
+=cut
+
+sub title {
+    my $self = shift;
+    return $self->{ title };
+}
+
 =head2 related()
 
 Returns a list of terms in the wikipedia that are mentioned in the 
@@ -196,11 +208,17 @@ sub _parse {
     my $src  = $self->{ src };
 
     # Add current language
-    my ( $lang ) = ( $src =~ /http:\/\/(..)/ );
+    my ( $lang )  = ( $src =~ /http:\/\/(..)/ );
     my $title = ( split( /\//, $src ) )[ -1 ];
+
+    if( $title =~ m{\?title=} ) {
+        ( $title ) = $src =~ m{\?title=([^\&]+)};
+        $title =~ s{_}{ }g;
+    }
 
     $self->{ currentlang } = $lang;
     $self->{ languages }->{ $lang } = $title;
+    $self->{ title } = $title;
 
     for (
         $self->{ cursor } = 0;
@@ -298,7 +316,7 @@ Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2003-2010 by Ed Summers
+Copyright 2003-2011 by Ed Summers
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
