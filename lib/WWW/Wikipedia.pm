@@ -187,7 +187,7 @@ sub random {
         my( $title ) = $response->request->uri =~ m{\.org/wiki/(.+)$};
         $src      = sprintf( WIKIPEDIA_URL, $self->language(), $title );
         $response = $self->get( $src );
-        return WWW::Wikipedia::Entry->new( $response->content(), $src );
+        return WWW::Wikipedia::Entry->new( $response->decoded_content(), $src );
     }
 
     $self->error( "uhoh, WWW::Wikipedia unable to contact " . $src );
