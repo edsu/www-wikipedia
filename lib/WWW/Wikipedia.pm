@@ -8,7 +8,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '1.99';
+our $VERSION = '2.00';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -155,12 +155,12 @@ sub search {
 
     my $response = $self->get( $src );
     if ( $response->is_success() ) {
-        my $entry = WWW::Wikipedia::Entry->new( $response->content(), $src );
+        my $entry = WWW::Wikipedia::Entry->new( $response->decoded_content(), $src );
 
         # look for a wikipedia style redirect and process if necessary
         return $self->search( $1 )
             if $self->follow_redirects
-                && $entry->text() =~ /^#REDIRECT ([^\r\n]+)/is;
+                && $entry->raw() =~ /^#REDIRECT \[\[([^|\]]+)/is;
 
         return ( $entry );
     }
