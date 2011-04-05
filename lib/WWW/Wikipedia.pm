@@ -148,19 +148,19 @@ sub search {
 
     croak( "search() requires you pass in a string" ) if !defined( $string );
     
-    $string = utf8::is_utf8( $string )
+    my $enc_string = utf8::is_utf8( $string )
         ? URI::Escape::uri_escape_utf8( $string )
         : URI::Escape::uri_escape( $string );
-    my $src = sprintf( WIKIPEDIA_URL, $self->language(), $string );
+    my $src = sprintf( WIKIPEDIA_URL, $self->language(), $enc_string );
 
     my $response = $self->get( $src );
     if ( $response->is_success() ) {
         my $entry = WWW::Wikipedia::Entry->new( $response->decoded_content(), $src );
 
         # look for a wikipedia style redirect and process if necessary
+        # try to catch self-redirects
         return $self->search( $1 )
-            if $self->follow_redirects
-                && $entry->raw() =~ /^#REDIRECT \[\[([^|\]]+)/is;
+            if $self->follow_redirects && $entry->raw() =~ /^#REDIRECT \[\[([^|\]]+)/is && $1 ne $string;
 
         return ( $entry );
     }

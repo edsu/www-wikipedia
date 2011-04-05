@@ -1,8 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
-2.00    TO BE RELEASED
+2.00    Tue Apr 05 2011
         - use decoded_content() rather than just content() (RT #66337)
         - parse raw text to get proper redirect link (RT #66337)
+        - try to catch self-redirects (RT #66337)
 
 1.99    Wed Feb 16 2011
         - Fix up title in entry and provide an accessor for the value
