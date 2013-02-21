@@ -1,4 +1,4 @@
-use inc::Module::Install 0.99;
+use inc::Module::Install 1.00;
 
 if ( -e 'MANIFEST.SKIP' ) {
     system( 'pod2text lib/WWW/Wikipedia.pm > README' );

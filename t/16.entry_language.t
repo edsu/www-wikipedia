@@ -20,11 +20,11 @@ ok( $entry_es->languages() > 0, 'languages()' );
 is( $entry_es->language(), 'es', 'language()' );
 
 {
-    my $ru = WWW::Wikipedia->new->search( 'Russia' );
+    my $ru = WWW::Wikipedia->new->search( 'Babushka' );
     isa_ok( $ru, 'WWW::Wikipedia::Entry' );
     my $ru_ru = $ru->language( 'ru' );
     isa_ok( $ru_ru, 'WWW::Wikipedia::Entry' );
-    ok( $ru_ru->text, 'Page for Russia in Russian' );
+    ok( $ru_ru->text, 'Page for "Babushka" in Russian' );
 }
 
 ## fetches some wikitext from disk
