@@ -78,6 +78,13 @@ you have full access.
 You can turn off the following of wikipedia redirect directives by passing
 a false value to C<follow_redirects>.
 
+Together with the Wiki markup, some entries include HTML tags.
+They can be stripped out using the C<clean_html> option:
+
+   my $wiki = WWW::Wikipedia->new( clean_html => 1 );
+
+See C<clean_html> documentation bellow for details.
+
 =cut
 
 sub new {
@@ -86,6 +93,7 @@ sub new {
     my $language = delete $opts{ language } || 'en';
     my $follow = delete $opts{ follow_redirects };
     $follow = 1 if !defined $follow;
+    my $clean_html = delete $opts{ clean_html } || 0;
 
     my $self = LWP::UserAgent->new( %opts );
     $self->agent( 'WWW::Wikipedia' );
@@ -93,6 +101,7 @@ sub new {
 
     $self->language( $language );
     $self->follow_redirects( $follow );
+    $self->clean_html( $clean_html );
     $self->parse_head( 0 );
     return $self;
 }
@@ -113,6 +122,26 @@ sub language {
     my ( $self, $language ) = @_;
     $self->{ language } = $language if $language;
     return $self->{ language };
+}
+
+
+=head2 clean_html()
+
+Allows to get/set if HTML is being stripped out.
+
+    # set HTML strip
+    $wiki->clean_html( 1 );
+
+This option removes all tags and attributes they might have.
+Their contents, however, is maintained (for now). Comments are
+also removed.
+
+=cut
+
+sub clean_html {
+    my ( $self, $bool ) = @_;
+    $self->{ clean_html } = $bool if defined $bool;
+    return $self->{ clean_html };
 }
 
 =head2 follow_redirects()
@@ -155,7 +184,8 @@ sub search {
 
     my $response = $self->get( $src );
     if ( $response->is_success() ) {
-        my $entry = WWW::Wikipedia::Entry->new( $response->decoded_content(), $src );
+        my $entry = WWW::Wikipedia::Entry->new( $response->decoded_content(), $src,
+                        clean_html => $self->{ clean_html } );
 
         # look for a wikipedia style redirect and process if necessary
         # try to catch self-redirects
@@ -187,7 +217,8 @@ sub random {
         my( $title ) = $response->request->uri =~ m{\.org/wiki/(.+)$};
         $src      = sprintf( WIKIPEDIA_URL, $self->language(), $title );
         $response = $self->get( $src );
-        return WWW::Wikipedia::Entry->new( $response->decoded_content(), $src );
+        return WWW::Wikipedia::Entry->new( $response->decoded_content(), $src,
+            clean_html => $self->{ clean_html } );
     }
 
     $self->error( "uhoh, WWW::Wikipedia unable to contact " . $src );
@@ -215,9 +246,16 @@ sub error {
 
 =over 4
 
-=item * Clean up results. Strip HTML.
+=item *
 
-=item * Watch the development of Special:Export XML formatting, eg: http://en.wikipedia.org/wiki/Special:Export/perl
+Be more specific on the HTML clean methodology. For now all tags are removed,
+keeping only their contents. In the future the behaviour might change
+accordingly with each specific tag.
+
+=item *
+
+Watch the development of Special:Export XML formatting, eg:
+http://en.wikipedia.org/wiki/Special:Export/perl
 
 =back
 
