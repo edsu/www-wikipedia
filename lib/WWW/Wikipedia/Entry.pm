@@ -35,7 +35,7 @@ behind the scenes with the correct arguments by WWW::Wikipedia::search().
 =cut
 
 sub new {
-    my ( $class, $raw, $src ) = @_;
+    my ( $class, $raw, $src, %ops ) = @_;
     return if length( $raw ) == 0;
     my $self = bless {
         raw         => $raw,
@@ -55,6 +55,11 @@ sub new {
     # store un-"pretty"-ed version of text
     $self->{ fulltext_basic } = $self->{ fulltext };
     $self->{ text_basic }     = $self->{ text };
+
+    if ($ops{clean_html}) {
+    	$self->{ fulltext } = _clean_html( $self->{ fulltext });
+    	$self->{ text } = _clean_html( $self->{ text });
+    }
 
     $self->{ fulltext } = _pretty( $self->{ fulltext } );
     $self->{ text }     = _pretty( $self->{ text } );
@@ -291,6 +296,14 @@ sub _parse {
             $self->{ fulltext } .= substr( $raw, $self->{ cursor }, 1 );
         }
     }
+}
+
+# future versions might clean tag contents for some specific ones.
+sub _clean_html {
+	my $text = shift;
+	# force first letter so that standalone < might be kept
+	$text =~ s{<[/a-zA-Z!][^>]+>}{}g;
+	return $text;
 }
 
 sub _pretty {

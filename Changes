@@ -1,5 +1,7 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+ - Add clean_html option to strip basic HTML tags.
+
 2.01 2013-02-21
 
  - Update test suite due to a change in returned data
