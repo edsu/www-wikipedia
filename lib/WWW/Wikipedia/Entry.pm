@@ -1,9 +1,12 @@
 package WWW::Wikipedia::Entry;
 
+use 5.006;
 use strict;
 use warnings;
 use Text::Autoformat;
 use WWW::Wikipedia;
+
+our $VERSION = '2.02';
 
 =head1 NAME
 

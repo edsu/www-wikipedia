@@ -1,5 +1,6 @@
 package WWW::Wikipedia;
 
+use 5.006;
 use strict;
 use warnings;
 use Carp qw( croak );
@@ -8,7 +9,7 @@ use WWW::Wikipedia::Entry;
 
 use base qw( LWP::UserAgent );
 
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 
 use constant WIKIPEDIA_URL =>
     'http://%s.wikipedia.org/w/index.php?title=%s&action=raw';
@@ -190,7 +191,7 @@ sub search {
         # look for a wikipedia style redirect and process if necessary
         # try to catch self-redirects
         return $self->search( $1 )
-            if $self->follow_redirects && $entry->raw() =~ /^#REDIRECT \[\[([^|\]]+)/is && $1 ne $string;
+            if $self->follow_redirects && $entry->raw() =~ /^#REDIRECT\s*\[\[([^|\]]+)/is && $1 ne $string;
 
         return ( $entry );
     }
@@ -266,6 +267,10 @@ http://en.wikipedia.org/wiki/Special:Export/perl
 =item * LWP::UserAgent
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/edsu/www-wikipedia>
 
 =head1 AUTHORS
 

@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+ - Make whitespace after REDIRECT optional, to fix RT#94111
+ - Changed github URL to https, and added repo to doc
+ - Added "use 5.006;" to both modules
  - Add clean_html option to strip basic HTML tags.
 
 2.01 2013-02-21
