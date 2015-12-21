@@ -17,6 +17,6 @@ test_requires 'Test::More';
 
 install_script 'bin/wikipedia';
 
-repository 'http://github.com/edsu/www-wikipedia';
+repository 'https://github.com/edsu/www-wikipedia';
 
 WriteAll;

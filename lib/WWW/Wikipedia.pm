@@ -267,6 +267,10 @@ http://en.wikipedia.org/wiki/Special:Export/perl
 
 =back
 
+=head1 REPOSITORY
+
+L<https://github.com/edsu/www-wikipedia>
+
 =head1 AUTHORS
 
 Ed Summers E<lt>ehs@pobox.comE<gt>
