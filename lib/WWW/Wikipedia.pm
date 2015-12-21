@@ -190,7 +190,7 @@ sub search {
         # look for a wikipedia style redirect and process if necessary
         # try to catch self-redirects
         return $self->search( $1 )
-            if $self->follow_redirects && $entry->raw() =~ /^#REDIRECT \[\[([^|\]]+)/is && $1 ne $string;
+            if $self->follow_redirects && $entry->raw() =~ /^#REDIRECT\s*\[\[([^|\]]+)/is && $1 ne $string;
 
         return ( $entry );
     }
