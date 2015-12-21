@@ -1,5 +1,6 @@
 package WWW::Wikipedia::Entry;
 
+use 5.006;
 use strict;
 use warnings;
 use Text::Autoformat;
