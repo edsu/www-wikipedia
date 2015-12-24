@@ -289,7 +289,7 @@ sub _parse {
         }
 
         ## {{ disambig }}
-        elsif ( $raw =~ /\G{{ *(.*?) *}}/ ) {
+        elsif ( $raw =~ /\G\{\{ *(.*?) *\}\}/ ) {
             ## ignore for now
             $self->{ cursor } += length( $& ) - 1;
             next;
