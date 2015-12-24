@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+2.03 2014-12-23
+
+ - fix "Unescaped left brace in regex is deprecated" (RT #110564)
+
 2.02 2015-12-21
 
  - Make whitespace after REDIRECT optional, to fix RT#94111
