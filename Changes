@@ -1,6 +1,10 @@
 Revision history for Perl extension WWW::Wikipedia.
 
-2.03 2014-12-23
+2.04 2015-12-30
+
+ - add LWP::Protocol::https to prereqs (RT #110781)
+
+2.03 2015-12-23
 
  - fix "Unescaped left brace in regex is deprecated" (RT #110564)
 

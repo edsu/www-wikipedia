@@ -10,6 +10,7 @@ name 'WWW-Wikipedia';
 all_from 'lib/WWW/Wikipedia.pm';
 
 requires 'LWP::UserAgent';
+requires 'LWP::Protocol::https';
 requires 'URI';
 requires 'Text::Autoformat';
 

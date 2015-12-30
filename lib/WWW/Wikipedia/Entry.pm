@@ -6,7 +6,7 @@ use warnings;
 use Text::Autoformat;
 use WWW::Wikipedia;
 
-our $VERSION = '2.03';
+our $VERSION = '2.04';
 
 =head1 NAME
 
