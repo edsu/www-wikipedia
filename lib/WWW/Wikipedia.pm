@@ -264,7 +264,7 @@ http://en.wikipedia.org/wiki/Special:Export/perl
 
 =over 4
 
-=item * LWP::UserAgent
+=item * L<LWP::UserAgent>
 
 =back
 
