@@ -84,7 +84,7 @@ They can be stripped out using the C<clean_html> option:
 
    my $wiki = WWW::Wikipedia->new( clean_html => 1 );
 
-See C<clean_html> documentation bellow for details.
+See C<clean_html> documentation below for details.
 
 =cut
 
@@ -128,7 +128,7 @@ sub language {
 
 =head2 clean_html()
 
-Allows to get/set if HTML is being stripped out.
+Allows you to get/set if HTML is being stripped out.
 
     # set HTML strip
     $wiki->clean_html( 1 );

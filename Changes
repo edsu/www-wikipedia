@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Wikipedia.
 
+2.05 XXX
+
+ - fix documenation typos (RT #110981)
+
 2.04 2015-12-30
 
  - add LWP::Protocol::https to prereqs (RT #110781)
