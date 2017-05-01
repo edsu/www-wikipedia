@@ -182,6 +182,11 @@ With no parameters, it will return the current language of the entry. By
 specifying a two-letter language code, it will return the same entry in that
 language, if available.
 
+NOTE: Generally, Wikipedia no longer uses language tags stored on a page. 
+Rather, languages are driven from wikidata, which this module does not
+query. You will find for most pages there are no other languages available,
+based on how this method currently works..
+
 =cut
 
 sub language {
