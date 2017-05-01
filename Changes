@@ -1,7 +1,10 @@
 Revision history for Perl extension WWW::Wikipedia.
 
-2.05 XXX
+2.05 2017-05-01
 
+ - remove live test for WWW::Wikipedia::Entry::lanaguage() and 
+   add a note about its utility now that languages are driven 
+   from wikidata
  - fix documenation typos (RT #110981)
 
 2.04 2015-12-30
