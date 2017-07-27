@@ -13,6 +13,7 @@ requires 'LWP::UserAgent';
 requires 'LWP::Protocol::https';
 requires 'URI';
 requires 'Text::Autoformat';
+requires 'Pod::Usage';
 
 test_requires 'Test::More';
 
